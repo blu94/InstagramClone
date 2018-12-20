@@ -1,5 +1,6 @@
 package com.ycw.blu.instagramclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,11 @@ public class SignUpLoginActivity extends AppCompatActivity {
                                     FancyToast.LENGTH_LONG,
                                     FancyToast.SUCCESS,
                                     false).show();
+
+                            // login
+                            Intent intent = new Intent(SignUpLoginActivity.this,
+                                    Welcome.class);
+                            startActivity(intent);
                         }
                         else {
                             FancyToast.makeText(SignUpLoginActivity.this,
@@ -74,6 +80,11 @@ public class SignUpLoginActivity extends AppCompatActivity {
                                     FancyToast.LENGTH_LONG,
                                     FancyToast.SUCCESS,
                                     false).show();
+
+                            // login
+                            Intent intent = new Intent(SignUpLoginActivity.this,
+                                    Welcome.class);
+                            startActivity(intent);
                         }
                         else {
                             FancyToast.makeText(SignUpLoginActivity.this,
