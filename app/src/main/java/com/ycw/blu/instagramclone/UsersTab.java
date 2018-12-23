@@ -1,11 +1,14 @@
 package com.ycw.blu.instagramclone;
 
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,10 +25,11 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UsersTab extends Fragment {
+public class UsersTab extends Fragment implements AdapterView.OnItemClickListener,
+        AdapterView.OnItemLongClickListener {
 
     private ListView userTabListView;
-    private ArrayList arrayList;
+    private ArrayList<String> arrayList;
     private ArrayAdapter arrayAdapter;
     private TextView userTabLoadingTxt;
 
@@ -43,6 +47,8 @@ public class UsersTab extends Fragment {
         arrayList = new ArrayList();
         arrayAdapter = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,arrayList);
         userTabLoadingTxt = view.findViewById(R.id.userTabLoadingTxt);
+
+        userTabListView.setOnItemClickListener(UsersTab.this);
 
         ParseQuery<ParseUser> parseQuery = ParseUser.getQuery();
         parseQuery.whereNotEqualTo("username", ParseUser.getCurrentUser().getUsername());
@@ -66,4 +72,16 @@ public class UsersTab extends Fragment {
         return view;
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getContext(), UsersPosts.class);
+        intent.putExtra("username",arrayList.get(position));
+        startActivity(intent);
+
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        return false;
+    }
 }
